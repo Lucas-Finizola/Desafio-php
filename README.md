@@ -1,5 +1,9 @@
+
 # 📦 Desafio Engeselt Softwares - Desenvolvedor Web PHP JR
 
+=======
+# Desafio_php
+>>>>>>> a096248 (Update README.md)
 Este projeto utiliza o framework Laravel. Abaixo estão os passos completos para rodar o ambiente local, indicamos o uso do laradock onde abaixo deixaremos um link de exemplificação de uso, porém pode ser feito uso do laravel sail, docker... O importante é que o projeto seja executado e consiga ser feito as devidas tratativas.
 
 ---
