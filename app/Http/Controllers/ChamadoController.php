@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateChamadoRequest;
 use App\Models\Chamado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ChamadoController extends Controller
 {
@@ -28,7 +29,7 @@ class ChamadoController extends Controller
      */
     public function create()
     {
-        return view('chamados.create');
+        return view('chamados.create')->with('info', 'Preencha os dados do novo chamado');
     }
 
     /**
@@ -48,7 +49,8 @@ class ChamadoController extends Controller
             return redirect()->route('chamados.index')
                    ->with('success', 'Chamado criado com sucesso!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Erro ao criar chamado: '.$e->getMessage());
+            return back()->with('error', 'Erro ao criar chamado: '.$e->getMessage())
+                   ->withInput();
         }
     }
 
@@ -71,7 +73,8 @@ class ChamadoController extends Controller
     {
         $this->authorize('update', $chamado);
 
-        return view('chamados.edit', compact('chamado'));
+        return view('chamados.edit', compact('chamado'))
+               ->with('warning', 'Editando chamado - todas as alterações serão registradas');
     }
 
     /**
@@ -97,7 +100,8 @@ class ChamadoController extends Controller
             return redirect()->route('chamados.show', $chamado)
                    ->with('success', 'Chamado atualizado com sucesso!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Erro ao atualizar chamado: '.$e->getMessage());
+            return back()->with('error', 'Erro ao atualizar chamado: '.$e->getMessage())
+                   ->withInput();
         }
     }
 

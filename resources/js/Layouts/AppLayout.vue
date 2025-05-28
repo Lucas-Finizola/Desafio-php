@@ -287,3 +287,6 @@ const logout = () => {
         </div>
     </div>
 </template>
+<script setup>
+import Alert from '@/Components/Alert.vue';
+</script>
