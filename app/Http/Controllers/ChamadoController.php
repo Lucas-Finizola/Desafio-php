@@ -40,8 +40,10 @@ class ChamadoController extends Controller
     }
 
     public function show(Chamado $chamado)
-    {
-        return Inertia::render('Chamados/Show', compact('chamado'));
-    }
+{
+    return Inertia::render('Chamados/Show', [
+        'chamado' => $chamado->load('user', 'respostas.user')
+    ]);
+}
 }
 
