@@ -52,21 +52,16 @@ Route::middleware([
      */
     Route::middleware('can:isColaborador')->group(function () {
         Route::resource('chamados', ChamadoController::class)->except(['edit', 'update']);
-        
-
-        // Route::get('chamados/{chamado}/edit', [ChamadoController::class, 'edit'])->name('chamados.edit');
-        // Route::patch('chamados/{chamado}', [ChamadoController::class, 'update'])->name('chamados.update');
     });
 
     /**
      * Rotas do TÉCNICO
      * - Acessível apenas para usuários com role 'tecnico'
      */
-        Route::prefix('tecnico')->name('tecnico.')->middleware('can:isTecnico')->group(function () {
+    Route::prefix('tecnico')->name('tecnico.')->middleware('can:isTecnico')->group(function () {
         Route::get('chamados', [ChamadoTecnicoController::class, 'index'])->name('chamados.index');
         Route::get('chamados/{chamado}', [ChamadoTecnicoController::class, 'show'])->name('chamados.show');
         Route::post('chamados/{chamado}/resposta', [ChamadoTecnicoController::class, 'responder'])->name('chamados.responder');
         Route::patch('chamados/{chamado}/status', [ChamadoTecnicoController::class, 'alterarStatus'])->name('chamados.status');
-        Route::get('/chamados/{chamado}', [ChamadoController::class, 'show'])->name('chamados.show');
     });
 });
