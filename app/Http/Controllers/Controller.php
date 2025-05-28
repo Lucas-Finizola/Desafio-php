@@ -24,4 +24,17 @@ class ChamadoController extends Controller
         return redirect()->route('chamados.index')
                ->with('success', 'Chamado criado com sucesso!');
     }
+    public function show(Chamado $chamado)
+{
+    $this->authorize('view', $chamado);
+
+    return Inertia::render('Chamados/Show', [
+        'chamado' => $chamado->load(['user', 'tecnico', 'respostas.user']),
+        'can' => [
+            'update' => auth()->user()->can('update', $chamado),
+            'delete' => auth()->user()->can('delete', $chamado),
+            'responder' => auth()->user()->isTecnico(),
+        ]
+    ]);
+}
 }

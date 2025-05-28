@@ -27,6 +27,7 @@ class StoreChamadoRequest extends FormRequest
             'categoria' => 'required|string|max:100',
             'prioridade' => 'required|in:Baixa,Média,Alta',
             'anexo' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048',
+            'mensagem' => 'required|string|max:2000',
         ];
     }
 
@@ -41,6 +42,8 @@ class StoreChamadoRequest extends FormRequest
             'prioridade.in' => 'A prioridade deve ser Baixa, Média ou Alta',
             'anexo.mimes' => 'O anexo deve ser uma imagem (JPG, PNG), PDF ou documento do Word',
             'anexo.max' => 'O tamanho máximo do anexo é 2MB',
+            'mensagem.required' => 'A mensagem da resposta é obrigatória',
+            'mensagem.max' => 'A mensagem não pode ter mais que 2000 caracteres',
         ];
     }
 }
