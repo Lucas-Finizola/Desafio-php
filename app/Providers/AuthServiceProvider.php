@@ -3,20 +3,21 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\Chamado; // Adicionar import do Chamado
+use App\Policies\ChamadoPolicy; // Adicionar import da Policy
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Chamado::class => ChamadoPolicy::class, 
     ];
 
     public function boot()
     {
         $this->registerPolicies();
 
-        // Definição dos Gates
         Gate::define('isTecnico', function (User $user) {
             return $user->role === 'tecnico';
         });
@@ -24,5 +25,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isColaborador', function (User $user) {
             return $user->role === 'colaborador';
         });
+
     }
 }
